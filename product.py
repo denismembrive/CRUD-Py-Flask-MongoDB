@@ -1,15 +1,27 @@
 # Creamos la clase productos y la coleccion que guardaremos en nuestra base de datos
 class Product:
-    def __init__(self, name, price, quantity):
+    def __init__(self, name, lastName, edad, email, pais, description):                                               # VAMOS A HACER UNOS CAMBIOS
         self.name = name
-        self.price = price
-        self.quantity = quantity
+        self.lastName = lastName
+        self.edad = edad
+        self.email = email
+        self.pais = pais
+        self.description = description
+
 
 # Creamos la funcion para crear la coleccion o el documento que se va a guardar en la base de datos
 
     def toDBCollection(self):
         return{
             'name': self.name,
-            'price': self.price,
-            'quantity': self.quantity
+            'lastName': self.lastName,
+            'edad': self.edad,
+            'email': self.email,
+            'pais': self.pais,
+            'description': self.description
+            
+            
         }
+    
+
+ 

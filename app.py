@@ -18,16 +18,23 @@ def home():
 def addProduct():
     products = db['products']
     name = request.form['name']
-    price = request.form['price']
-    quantity = request.form['quantity']
+    lastName = request.form['lastName']
+    edad = request.form['edad']
+    email = request.form['email']
+    pais = request.form['pais']
+    description = request.form['description']
 
-    if name and price and quantity:
-        product = Product(name, price, quantity)
+    if name and lastName and edad and email and pais and description:
+        product = Product(name, lastName, edad, email, pais, description)
         products.insert_one(product.toDBCollection())
         response = jsonify({
             'name' : name,
-            'price' : price,
-            'quantity' : quantity
+            'lasName': lastName,
+            'edad': edad,
+            'email': email,
+            'pais': pais,
+            'description' : description
+            
         })
         return redirect(url_for('home'))
     else:
@@ -45,11 +52,14 @@ def delete(product_name):
 def edit(product_name):
     products = db['products']
     name = request.form['name']
-    price = request.form['price']
-    quantity = request.form['quantity']
+    lastName = request.form['lastName']
+    edad = request.form['edad']
+    email = request.form['email']
+    pais = request.form['pais']
+    description = request.form['description']
 
-    if name and price and quantity:
-        products.update_one({'name' : product_name}, {'$set' : {'name' : name, 'price' : price, 'quantity' : quantity}})
+    if name and lastName and edad and email and pais and description:
+        products.update_one({'name' : product_name}, {'$set' : {'name' : name,'lastName' : lastName, 'edad' : edad, 'email' : email, 'pais' : pais,  'description' : description, }})
         response = jsonify({'message' : 'Producto ' + product_name + ' actualizado correctamente'})
         return redirect(url_for('home'))
     else:
