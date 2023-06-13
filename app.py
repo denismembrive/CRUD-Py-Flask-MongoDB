@@ -13,6 +13,13 @@ def home():
     productsReceived = products.find()
     return render_template('index.html', products = productsReceived)
 
+'''#Ruta home 2
+@app.route('/')
+def homeDos():
+    products = db['products']
+    productsReceived = products.find()
+    return render_template('index.html', products = productsReceived)
+'''
 #Method Post
 @app.route('/products', methods=['POST'])
 def addProduct():
@@ -20,17 +27,19 @@ def addProduct():
     name = request.form['name']
     lastName = request.form['lastName']
     edad = request.form['edad']
+    dni = request.form['dni']
     email = request.form['email']
     pais = request.form['pais']
     description = request.form['description']
 
-    if name and lastName and edad and email and pais and description:
-        product = Product(name, lastName, edad, email, pais, description)
+    if name and lastName and edad and dni and email and pais and description:
+        product = Product(name, lastName, edad, dni, email, pais, description)
         products.insert_one(product.toDBCollection())
         response = jsonify({
             'name' : name,
             'lasName': lastName,
             'edad': edad,
+            'dni': dni,
             'email': email,
             'pais': pais,
             'description' : description
@@ -54,12 +63,13 @@ def edit(product_name):
     name = request.form['name']
     lastName = request.form['lastName']
     edad = request.form['edad']
+    dni = request.form['dni']
     email = request.form['email']
     pais = request.form['pais']
     description = request.form['description']
 
-    if name and lastName and edad and email and pais and description:
-        products.update_one({'name' : product_name}, {'$set' : {'name' : name,'lastName' : lastName, 'edad' : edad, 'email' : email, 'pais' : pais,  'description' : description, }})
+    if name and lastName and edad and dni and email and pais and description:
+        products.update_one({'name' : product_name}, {'$set' : {'name' : name,'lastName' : lastName, 'edad' : edad, 'dni' : dni, 'email' : email, 'pais' : pais,  'description' : description, }})
         response = jsonify({'message' : 'Producto ' + product_name + ' actualizado correctamente'})
         return redirect(url_for('home'))
     else:
