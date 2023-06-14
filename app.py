@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, Response, jsonify, redirect, url_for
 import database as dbase  
 from product import Product
+import random
 
 db = dbase.dbConnection()
 
@@ -20,6 +21,10 @@ def homeDos():
     productsReceived = products.find()
     return render_template('index.html', products = productsReceived)
 '''
+# Legajo generado automaticamente
+
+legajo = random.randint(2000, 4500)
+
 #Method Post
 @app.route('/products', methods=['POST'])
 def addProduct():
@@ -32,8 +37,8 @@ def addProduct():
     pais = request.form['pais']
     description = request.form['description']
 
-    if name and lastName and edad and dni and email and pais and description:
-        product = Product(name, lastName, edad, dni, email, pais, description)
+    if name and lastName and edad and dni and email and pais and description and legajo:
+        product = Product(name, lastName, edad, dni, email, pais, description, legajo)
         products.insert_one(product.toDBCollection())
         response = jsonify({
             'name' : name,
@@ -42,7 +47,9 @@ def addProduct():
             'dni': dni,
             'email': email,
             'pais': pais,
-            'description' : description
+            'description' : description,
+            'legajo': legajo
+            
             
         })
         return redirect(url_for('home'))

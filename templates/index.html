@@ -78,9 +78,12 @@
                                                     <input type="text" class="form-control" value="{{product.pais}}" name="pais">
                                                     <small>Descripcion</small>
                                                     <input type="text" class="form-control" value="{{product.description}}" name="description">
+                                                    <small>Legajo</small>
+                                                    <input type="text" class="form-control" value="{{product.legajo}}" name="legajo">
+                                    <!--CAMBIOS-->  
                                                     <button class="btn btn-primary btn-sm mt-3" type="submit" style="background-color: black;">Editar</button>
                                                     <a href="{{url_for('delete', product_name=product.name)}}" class="btn btn-danger btn-sm mt-3">Eliminar</a>
-    
+                                                    
                                                 </form>
                                             </li>
                                         </div>
