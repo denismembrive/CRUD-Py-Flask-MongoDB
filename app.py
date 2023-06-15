@@ -1,7 +1,13 @@
 from flask import Flask, render_template, request, Response, jsonify, redirect, url_for
 import database as dbase  
 from product import Product
+
+# Importamos el metodo random para generar auto-legajo 
 import random
+
+#Importamos las clases para enviar el email
+import smtplib 
+from email.message import EmailMessage
 
 db = dbase.dbConnection()
 
@@ -51,10 +57,39 @@ def addProduct():
             'legajo': legajo
             
             
-        })
+        })                                                                             # Alguno cambios
         return redirect(url_for('home'))
     else:
         return notFound()
+    
+    
+    
+        
+        
+# Envio de email confirmando suscripcion
+
+remitente = "denismembrive4@gmail.com"
+destinatario = "denismembrive@gmail.com"
+mensaje = "¡Se ha registrado correctamente!"
+email = EmailMessage()
+email["From"] = remitente
+email["To"] = destinatario
+email["Subject"] = "Correo de prueba"
+email.set_content(mensaje)
+smtp = smtplib.SMTP_SSL("smtp.gmail.com")
+smtp.login(remitente, "sdxeqmjwoowfkrhz")
+smtp.sendmail(remitente, destinatario, email.as_string())
+smtp.quit()
+
+
+
+
+
+
+
+
+
+
 
 #Method delete
 @app.route('/delete/<string:product_name>')
