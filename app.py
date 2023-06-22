@@ -62,14 +62,14 @@ def addProduct():
     else:
         return notFound()
     
-    
+
     
         
         
 # Envio de email confirmando suscripcion
 
 remitente = "denismembrive4@gmail.com"
-destinatario = "denismembrive@gmail.com"
+destinatario = "denismembrive3@gmail.com"
 mensaje = "¡Se ha registrado correctamente!"
 email = EmailMessage()
 email["From"] = remitente
